@@ -17,13 +17,23 @@ data["RestingBP"].fillna((data["RestingBP"].mean()), inplace=True)
 data["Cholesterol"].replace(0, np.nan).ffill()
 data["Cholesterol"].fillna((data["Cholesterol"].mean()), inplace=True)
 
-encoder = LabelEncoder()
-data.loc[:,"Sex"] = encoder.fit_transform(data.loc[:,"Sex"])
-data.loc[:,"ChestPainType"] = encoder.fit_transform(data.loc[:,"ChestPainType"])
-data.loc[:,"RestingECG"] = encoder.fit_transform(data.loc[:,"RestingECG"])
-data.loc[:,"ExerciseAngina"] = encoder.fit_transform(data.loc[:,"ExerciseAngina"])
-data.loc[:,"ST_Slope"] = encoder.fit_transform(data.loc[:,"ST_Slope"])
 
+#['F' 'M']
+#['ASY' 'ATA' 'NAP' 'TA']
+#['LVH' 'Normal' 'ST']
+#['N' 'Y']
+#['Down' 'Flat' 'Up']
+encoder = LabelEncoder()
+data.loc[:,"Sex"] = encoder.fit_transform(data.loc[:,"Sex"]) #['F' 'M']
+#print(encoder.classes_)
+data.loc[:,"ChestPainType"] = encoder.fit_transform(data.loc[:,"ChestPainType"]) #['ASY' 'ATA' 'NAP' 'TA']
+#print(encoder.classes_)
+data.loc[:,"RestingECG"] = encoder.fit_transform(data.loc[:,"RestingECG"]) #['LVH' 'Normal' 'ST']
+#print(encoder.classes_)
+data.loc[:,"ExerciseAngina"] = encoder.fit_transform(data.loc[:,"ExerciseAngina"]) #['N' 'Y']
+#print(encoder.classes_)
+data.loc[:,"ST_Slope"] = encoder.fit_transform(data.loc[:,"ST_Slope"]) #['Down' 'Flat' 'Up']
+#print(encoder.classes_)
 
 y = data.iloc[:,11]
 x = data.iloc[:,0:11]
